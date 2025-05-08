@@ -14,9 +14,9 @@ services:
       - /usr/src/app/node_modules
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.portfolio.rule=Host(`contact-api.dndnew.hu`)"
-      - "traefik.http.routers.portfolio.entrypoints=websecure"
-      - "traefik.http.routers.portfolio.tls.certresolver=myresolver"
+      - "traefik.http.routers.contact_api.rule=Host(`contact-api.dndnew.hu`)"
+      - "traefik.http.routers.contact_api.entrypoints=websecure"
+      - "traefik.http.routers.contact_api.tls.certresolver=myresolver"
     networks:
       - traefik-public
 
