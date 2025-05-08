@@ -11,6 +11,7 @@ services:
     stdin_open: true
     volumes:
       - .:/usr/src/app
+      - /usr/src/app/node_modules
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.portfolio.rule=Host(`contact-api.dndnew.hu`)"
