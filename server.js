@@ -16,6 +16,9 @@ const transporter = nodemailer.createTransport({
     user: process.env.MAIL_USER,
     pass: process.env.MAIL_PASS,
   },
+  connectionTimeout: 10000,
+  logger: true,
+  debug: true,
 });
 
 app.get("/", (req, res) => {
@@ -25,14 +28,18 @@ app.get("/", (req, res) => {
 app.post("/api/send-email", async (req, res) => {
   const { name, email, message } = req.body;
 
+  console.log("Kérelem érkezett:", { name, email, message });
+
   try {
+    console.log("Email küldés elkezdődött");
     await transporter.sendMail({
       from: `"${name}" <${email}>`,
       to: process.env.MAIL_USER,
       subject: "Kapcsolatfelvétel az oldalról",
       text: message,
+      replyTo: email,
     });
-
+    console.log("Email elküldve");
     res.status(200).json({ success: true, message: "Sikeresen elküldve" });
   } catch (err) {
     console.error("Emailküldési hiba:", err);
