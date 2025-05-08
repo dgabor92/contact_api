@@ -1,0 +1,24 @@
+version: "3.7"
+
+services:
+  contact_api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: contact_api
+    ports:
+      - "3001:3001"
+    stdin_open: true
+    volumes:
+      - .:/usr/src/app
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.portfolio.rule=Host(`contact-api.dndnew.hu`)"
+      - "traefik.http.routers.portfolio.entrypoints=websecure"
+      - "traefik.http.routers.portfolio.tls.certresolver=myresolver"
+    networks:
+      - traefik-public
+
+networks:
+  traefik-public:
+    external: true
