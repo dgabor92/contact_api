@@ -18,6 +18,10 @@ const transporter = nodemailer.createTransport({
   },
 });
 
+app.get("/", (req, res) => {
+  res.send("Üdvözlünk az API-ban!");
+});
+
 app.post("/api/send-email", async (req, res) => {
   const { name, email, message } = req.body;
 
